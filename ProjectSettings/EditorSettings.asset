@@ -4,7 +4,11 @@
 EditorSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 7
+<<<<<<< HEAD
   m_ExternalVersionControlSupport: PlasticSCM
+=======
+  m_ExternalVersionControlSupport: Hidden Meta Files
+>>>>>>> 51cd64fb0c717c7ad01db5f70d59ce3a6724b149
   m_SerializationMode: 2
   m_LineEndingsForNewScripts: 2
   m_DefaultBehaviorMode: 1
