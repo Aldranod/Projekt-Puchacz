@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class owlMove : MonoBehaviour {
 
+    //ile skoków może zrobić sowa
+    public int PossibleJumpsCount = 1;
 
-    bool moving = false;
-    float t;
+    bool addVelovity = false;
+    float time;
+    Vector3 jumpVelocity;
+    //ile skoków sowa wykonała
+    int jumpCount = 0;
+    
+
+
     void Start()
     {
 
@@ -15,31 +23,45 @@ public class owlMove : MonoBehaviour {
     void Update()
     {
 
-        if (moving)
+        if (addVelovity)
         {
-            // when the cube has moved over 1 second report it's position
-            //t = t + Time.deltaTime;
-            //if (t > 1.0f)
-            //{
-            //    Debug.Log(gameObject.transform.position.y + " : " + t);
-            //    t = 0.0f;
-            //    moving = false;
-            //}
+            time += Time.deltaTime;
+            jumpVelocity += new Vector3(-(Time.deltaTime*10), Time.deltaTime*10.0f, 0);
+            //dokonaj skoku po określonym czasie, nie pozwól trzymać w nieskończoność
+            if (time > 1.0f)
+            {
+                Jump();
+            }
         }
 
     }
 
     void OnMouseDown()
     {
-        Debug.Log("owl click");
-        Move();
+        if (jumpCount < PossibleJumpsCount)
+        {
+            time = 0.0f;
+            Debug.Log("owl click");
+            addVelovity = true;
+        }
     }
 
-    void Move()
-    {
-        GetComponent<Rigidbody2D>().velocity = new Vector3(-2, 10, 0);
-        moving = true;
 
+    void OnMouseUp()
+    {
+        Jump();
+    }
+
+
+    void Jump()
+    {
+        if (jumpCount < PossibleJumpsCount)
+        {
+            Debug.Log("owl jump");
+            GetComponent<Rigidbody2D>().velocity = jumpVelocity;
+            addVelovity = false;
+            jumpCount++;
+        }
     }
 
 
