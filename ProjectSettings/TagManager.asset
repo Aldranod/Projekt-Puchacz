@@ -6,6 +6,7 @@ TagManager:
   tags:
   - spawningPoint
   - spawningPoint2
+  - floor
   layers:
   - Default
   - TransparentFX
