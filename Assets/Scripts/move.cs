@@ -5,18 +5,14 @@ using UnityEngine;
 public class move : MonoBehaviour {
 
     [SerializeField] float speed = 0.5f;
+    [SerializeField] GameObject spawningPoint;
+    [SerializeField] GameObject spawningPoint2;
     bool mouseTurn = true;
-
-    //cashed reference
-    GameObject spawningPoint;
-    GameObject spawningPoint2;
     
     // Use this for initialization
     void Start ()
     {
-        spawningPoint = GameObject.FindWithTag("spawningPoint");
-        spawningPoint2 = GameObject.FindWithTag("spawningPoint2");
-        
+ 
     }
 	
 	// Update is called once per frame
