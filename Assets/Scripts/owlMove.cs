@@ -61,14 +61,14 @@ public class owlMove : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("OnCollisionEnter2D");
         if (col.gameObject.tag == "floor")
         {
             Debug.Log("floorhit");
         }
         else if (col.gameObject.tag == "victim")
         {
-            Debug.Log("kill!");
+            Debug.Log("kill");
+            Reset();
         }
     }
     #endregion
@@ -88,6 +88,7 @@ public class owlMove : MonoBehaviour {
     {
         jumpCount = 0;
         transform.position = startPoint.position;
+        transform.rotation = Quaternion.identity;
     }
     #endregion
 

@@ -7,6 +7,7 @@ TagManager:
   - spawningPoint
   - spawningPoint2
   - floor
+  - victim
   layers:
   - Default
   - TransparentFX
