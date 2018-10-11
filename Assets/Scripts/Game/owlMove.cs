@@ -16,6 +16,7 @@ public class owlMove : MonoBehaviour {
     float time;
     //ile skoków sowa wykonała
     int jumpCount = 0;
+    bool isWatingForReset = false;
 
 
     #region eventy
@@ -28,6 +29,10 @@ public class owlMove : MonoBehaviour {
     void FixedUpdate()
     {
         CheckJumping();
+        if (isWatingForReset)
+        {
+            CountToReset();
+        }
 
     }
 
@@ -63,11 +68,17 @@ public class owlMove : MonoBehaviour {
     {
         if (col.gameObject.tag == "floor")
         {
-            Debug.Log("floorhit");
+            time = 0f;
+            isWatingForReset = true;
         }
         else if (col.gameObject.tag == "victim")
         {
-            Debug.Log("kill");
+            GameObject.Destroy(col.gameObject);
+            Reset();
+        }
+
+        else if (col.gameObject.tag == "owlCatch")
+        {
             Reset();
         }
     }
@@ -78,17 +89,27 @@ public class owlMove : MonoBehaviour {
     /// <summary>
     /// po uderzeniu odlicza chwile, zanim zrestartuje pozycje sowy
     /// </summary>
-    void StartCountToReset()
+    void CountToReset()
     {
+        time += Time.deltaTime;
+        if (time > 2.0f)
+        {
+            Reset();
+        }
 
     }
 
     //resetuje pozycje sowy
     void Reset()
     {
+        addVelovity = false;
+        isWatingForReset = false;
         jumpCount = 0;
         transform.position = startPoint.position;
         transform.rotation = Quaternion.identity;
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        GetComponent<Rigidbody2D>().angularVelocity = 0f;
+
     }
     #endregion
 

@@ -8,6 +8,8 @@ TagManager:
   - spawningPoint2
   - floor
   - victim
+  - owl
+  - owlCatch
   layers:
   - Default
   - TransparentFX
