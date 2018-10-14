@@ -14,8 +14,16 @@ public class EnemyPathing : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //if transform.position.x < previous.transform.position.x
+        //{
+        //    mousego left
+        //}
+        //else
+        //{
+        //    mousego right
+        //}
         Move();
-	}
+    }
 
     private void Move()
     {
