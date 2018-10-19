@@ -12,6 +12,7 @@ public class owlMove : MonoBehaviour, IResetable
     //linia która pokazuje jak będzie wystrzeliwana sowa
     public GameObject JumpLine;
     public Transform startPoint;
+    public bool useTimer = false;
 
     owlManager manager;
     bool addVelovity = false;
@@ -39,9 +40,12 @@ public class owlMove : MonoBehaviour, IResetable
         if (jumpCount < PossibleJumpsCount)
         {
             manager.isJumppingMode = true;
-            PowerLevelText.enabled = true;
-            JumpLine.SetActive(true);
-            time = 0.0f;
+            if (useTimer)
+            {
+                PowerLevelText.enabled = true;
+                time = 0.0f;
+            }
+            ReInitializeLine();
             addVelovity = true;
 
         }
@@ -118,8 +122,7 @@ public class owlMove : MonoBehaviour, IResetable
 
     }
     #endregion
-
-
+    
     #region obsługa skoku
     /// <summary>
     /// Sprawdzanie, czy sytępuje skok i jego obsługa
@@ -130,18 +133,21 @@ public class owlMove : MonoBehaviour, IResetable
         {
 
             UpdateLine(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            time += Time.deltaTime;
-            // jumpVelocity += new Vector3(Time.deltaTime, Time.deltaTime, 0);
-            //TODO: dodać jakiś dzielnik, żeby liczba procentów nie zapierdalała
-            //if (time % 5 == 0.0f)
-            //{
-            PowerLevelText.text = (time * 100).ToString("0.00") + "%";
-            //}
-
-            //dokonaj skoku po określonym czasie, nie pozwól trzymać w nieskończoność
-            if (time > 1.0f)
+            if (useTimer)
             {
-                Jump();
+                time += Time.deltaTime;
+                // jumpVelocity += new Vector3(Time.deltaTime, Time.deltaTime, 0);
+                //TODO: dodać jakiś dzielnik, żeby liczba procentów nie zapierdalała
+                //if (time % 5 == 0.0f)
+                //{
+                PowerLevelText.text = (time * 100).ToString("0.00") + "%";
+                //}
+
+                //dokonaj skoku po określonym czasie, nie pozwól trzymać w nieskończoność
+                if (time > 1.0f)
+                {
+                    Jump();
+                }
             }
         }
 
@@ -160,6 +166,14 @@ public class owlMove : MonoBehaviour, IResetable
             manager.isAfterJump = true;
             manager.isJumppingMode = false;
         }
+    }
+
+    //dodane, zeby wyzerowac linie zanim się aktyruje jej widok, bo inaczej brzydko miga
+    void ReInitializeLine()
+    {
+        JumpLine.SetActive(true);
+        JumpLine.GetComponent<LineRenderer>().SetPosition(0, Vector3.zero);
+        JumpLine.GetComponent<LineRenderer>().SetPosition(1, Vector3.zero);
     }
 
     void UpdateLine(Vector3 end)

@@ -23,9 +23,12 @@ public class owlFly : MonoBehaviour, IResetable {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (!manager.isJumppingMode && !manager.isAfterJump)
+        if (!manager.isAfterJump)
         {
-            speed = -speed;
+            if(col.gameObject.tag == "turnPoint")
+            { 
+                speed = -speed;
+            }
         }
     }
 
