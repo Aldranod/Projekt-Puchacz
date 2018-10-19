@@ -157,6 +157,7 @@ public class owlMove : MonoBehaviour, IResetable
     {
         if (jumpCount < PossibleJumpsCount)
         {
+            GetComponent<Animator>().Play("fly");
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             GetComponent<Rigidbody2D>().velocity = GetJumpVector();
             addVelovity = false;

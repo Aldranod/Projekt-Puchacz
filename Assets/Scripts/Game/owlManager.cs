@@ -56,5 +56,6 @@ public class owlManager : MonoBehaviour {
         isWatingForReset = false;
         GetComponent<Rigidbody2D>().bodyType =  startingBodytype;
         isAfterJump = false;
+        GetComponent<Animator>().Play("Idle");
     }
 }
