@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: puchaczBLink
+  m_Name: fly
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,13 +19,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 8a000a3ac8535fc4bbfd26bc80d47c68, type: 3}
+      value: {fileID: 21300000, guid: aea96cf445ef2f34d8537983968e05c4, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 4c531afc985590b4aa5fde0d4d52caea, type: 3}
-    - time: 0.16666667
-      value: {fileID: 21300000, guid: ddd98a95d989a9b4d82c413ce4c3ba91, type: 3}
-    - time: 0.25
-      value: {fileID: 21300000, guid: 1b2a542b44e47854e91201be0f2ba64b, type: 3}
+      value: {fileID: 21300000, guid: f437f67e15f4e0a46877915513c368c9, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -45,19 +41,17 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 8a000a3ac8535fc4bbfd26bc80d47c68, type: 3}
-    - {fileID: 21300000, guid: 4c531afc985590b4aa5fde0d4d52caea, type: 3}
-    - {fileID: 21300000, guid: ddd98a95d989a9b4d82c413ce4c3ba91, type: 3}
-    - {fileID: 21300000, guid: 1b2a542b44e47854e91201be0f2ba64b, type: 3}
+    - {fileID: 21300000, guid: aea96cf445ef2f34d8537983968e05c4, type: 3}
+    - {fileID: 21300000, guid: f437f67e15f4e0a46877915513c368c9, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.33333334
+    m_StopTime: 0.16666667
     m_OrientationOffsetY: 0
     m_Level: 0
-    m_CycleOffset: 1
+    m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
     m_LoopTime: 1
     m_LoopBlend: 0

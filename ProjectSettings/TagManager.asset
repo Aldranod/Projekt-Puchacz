@@ -10,6 +10,8 @@ TagManager:
   - victim
   - owl
   - owlCatch
+  - turnPoint
+  - hideout
   layers:
   - Default
   - TransparentFX

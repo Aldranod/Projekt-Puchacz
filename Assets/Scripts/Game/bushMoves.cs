@@ -13,7 +13,6 @@ public class bushMoves : MonoBehaviour {
         if (col.gameObject.tag == "victim")
         {
             GetComponent<Animator>().Play("krzakRuch");
-            Debug.Log("hide in krzak");
         }
     }
 
@@ -24,24 +23,4 @@ public class bushMoves : MonoBehaviour {
             GetComponent<Animator>().Play("Idle");
         }
     }
-
-    // zostawiam tu poprzednią wersje na wszelki wypadek ;)
-    //void OnCollisionEnter2D(Collision2D col)
-    //{
-    //    if (col.gameObject.tag == "victim")
-    //    {
-    //        GetComponent<Animator>().Play("krzakRuch");
-    //        Debug.Log("hide in krzak");
-    //    }
-    //}
-
-    //void OnCollisionExit2D(Collision2D col)
-    //{
-    //    if (col.gameObject.tag == "victim")
-    //    {
-    //        GetComponent<Animator>().Play("Idle");
-    //    }
-    //}
-
-
 }

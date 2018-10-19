@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class owlMove : MonoBehaviour {
+public class owlMove : MonoBehaviour, IResetable
+{
 
     //ile skoków może zrobić sowa
     public int PossibleJumpsCount = 1;
@@ -12,16 +13,17 @@ public class owlMove : MonoBehaviour {
     public GameObject JumpLine;
     public Transform startPoint;
 
+    owlManager manager;
     bool addVelovity = false;
     float time;
     //ile skoków sowa wykonała
     int jumpCount = 0;
-    bool isWatingForReset = false;
 
 
     #region eventy
     void Start()
     {
+        manager = GetComponent<owlManager>();
         PowerLevelText.enabled = false;
         JumpLine.GetComponent<LineRenderer>().SetPosition(0, transform.position);
     }
@@ -29,10 +31,6 @@ public class owlMove : MonoBehaviour {
     void FixedUpdate()
     {
         CheckJumping();
-        if (isWatingForReset)
-        {
-            CountToReset();
-        }
 
     }
 
@@ -40,6 +38,7 @@ public class owlMove : MonoBehaviour {
     {
         if (jumpCount < PossibleJumpsCount)
         {
+            manager.isJumppingMode = true;
             PowerLevelText.enabled = true;
             JumpLine.SetActive(true);
             time = 0.0f;
@@ -64,51 +63,58 @@ public class owlMove : MonoBehaviour {
         return finalVector;
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "hideout")
+        {
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            GetComponent<Animator>().Play("Idle");
+            CallReset(1f);
+        }
+    }
+        void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "floor")
         {
-            time = 0f;
-            isWatingForReset = true;
+            GetComponent<Animator>().Play("Idle");
+            CallReset(2f);
         }
         else if (col.gameObject.tag == "victim")
         {
             GameObject.Destroy(col.gameObject);
-            Reset();
+            CallReset(2f);
+            GetComponent<Animator>().Play("Idle");
         }
 
         else if (col.gameObject.tag == "owlCatch")
         {
-            Reset();
+            CallReset(1f);
         }
     }
     #endregion
 
-    #region obsługa kolizji
+    #region obsługa restartu
 
-    /// <summary>
-    /// po uderzeniu odlicza chwile, zanim zrestartuje pozycje sowy
-    /// </summary>
-    void CountToReset()
+    void CallReset(float time)
     {
-        time += Time.deltaTime;
-        if (time > 2.0f)
-        {
-            Reset();
-        }
-
+        manager.OwlReset(time);
     }
 
-    //resetuje pozycje sowy
-    void Reset()
+    void StopMove()
     {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         addVelovity = false;
-        isWatingForReset = false;
-        jumpCount = 0;
-        transform.position = startPoint.position;
         transform.rotation = Quaternion.identity;
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         GetComponent<Rigidbody2D>().angularVelocity = 0f;
+    }
+
+    //resetuje pozycje sowy
+    public void Reset()
+    {
+        jumpCount = 0;
+        transform.position = startPoint.position;
+        StopMove();
 
     }
     #endregion
@@ -145,17 +151,21 @@ public class owlMove : MonoBehaviour {
     {
         if (jumpCount < PossibleJumpsCount)
         {
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             GetComponent<Rigidbody2D>().velocity = GetJumpVector();
             addVelovity = false;
             jumpCount++;
             PowerLevelText.enabled = false;
             DestroyLine();
+            manager.isAfterJump = true;
+            manager.isJumppingMode = false;
         }
     }
 
     void UpdateLine(Vector3 end)
     {
         LineRenderer lr = JumpLine.GetComponent<LineRenderer>();
+        lr.SetPosition(0, new Vector3(transform.position.x, transform.position.y, transform.position.z));
         lr.SetPosition(1, new Vector3(end.x, end.y, transform.position.z));
     }
 
