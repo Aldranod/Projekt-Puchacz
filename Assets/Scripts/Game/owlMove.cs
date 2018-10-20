@@ -14,6 +14,7 @@ public class owlMove : MonoBehaviour, IResetable
     public Transform StartPoint;
     public bool UseTimer = false;
     public bool UsePowerDive = true;
+    public GameObject feathersParticle;
 
     owlManager manager;
     bool addVelovity = false;
@@ -110,6 +111,8 @@ public class owlMove : MonoBehaviour, IResetable
             if (Input.GetMouseButtonUp(0))
             {
                 isDive = true;
+                feathersParticle.transform.position = transform.position;
+                feathersParticle.GetComponent<ParticleSystem>().Play();
                 GetComponent<Animator>().Play("pikowanie");
             }
             else if (isDive)
