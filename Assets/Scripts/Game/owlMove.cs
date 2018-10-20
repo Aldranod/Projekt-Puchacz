@@ -110,7 +110,7 @@ public class owlMove : MonoBehaviour, IResetable
             if (Input.GetMouseButtonUp(0))
             {
                 isDive = true;
-                Debug.Log("DIVE");
+                GetComponent<Animator>().Play("pikowanie");
             }
             else if (isDive)
             {
