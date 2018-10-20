@@ -880,6 +880,34 @@ Transform:
   m_Father: {fileID: 1683320379}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1118150792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1118150793}
+  m_Layer: 0
+  m_Name: owlStartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1118150793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118150792}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.83, y: 27.251999, z: -99}
+  m_LocalScale: {x: 1.547, y: 1.547, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1683320379}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1182919210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,8 +1058,9 @@ MonoBehaviour:
   PossibleJumpsCount: 1
   PowerLevelText: {fileID: 265565496}
   JumpLine: {fileID: 488556}
-  startPoint: {fileID: 1291554787}
-  useTimer: 0
+  StartPoint: {fileID: 1118150793}
+  UseTimer: 0
+  UsePowerDive: 1
 --- !u!61 &1245477120
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1533,6 +1562,7 @@ Transform:
   - {fileID: 1498906565}
   - {fileID: 1006012872}
   - {fileID: 1060442563}
+  - {fileID: 1118150793}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

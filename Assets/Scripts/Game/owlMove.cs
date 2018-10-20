@@ -11,8 +11,9 @@ public class owlMove : MonoBehaviour, IResetable
     public Text PowerLevelText;
     //linia która pokazuje jak będzie wystrzeliwana sowa
     public GameObject JumpLine;
-    public Transform startPoint;
-    public bool useTimer = false;
+    public Transform StartPoint;
+    public bool UseTimer = false;
+    public bool UsePowerDive = true;
 
     owlManager manager;
     bool addVelovity = false;
@@ -32,7 +33,7 @@ public class owlMove : MonoBehaviour, IResetable
     void FixedUpdate()
     {
         CheckJumping();
-
+        CheckDive();
     }
 
     void OnMouseDown()
@@ -40,7 +41,7 @@ public class owlMove : MonoBehaviour, IResetable
         if (jumpCount < PossibleJumpsCount)
         {
             manager.isJumppingMode = true;
-            if (useTimer)
+            if (UseTimer)
             {
                 PowerLevelText.enabled = true;
                 time = 0.0f;
@@ -97,6 +98,33 @@ public class owlMove : MonoBehaviour, IResetable
     }
     #endregion
 
+    #region power dive
+
+    float divePower = 5f;
+    bool isDive = false;
+    void CheckDive()
+    {
+        if(UsePowerDive && manager.isAfterJump)
+        {
+            //oczekuj na przycisk myszy
+            if (Input.GetMouseButtonUp(0))
+            {
+                isDive = true;
+                Debug.Log("DIVE");
+            }
+            else if (isDive)
+            {
+                Dive();
+            }
+        }
+    }
+
+    void Dive()
+    {
+        GetComponent<Rigidbody2D>().AddForce(-(transform.up) * divePower, ForceMode2D.Impulse);
+    }
+    #endregion
+
     #region obsługa restartu
 
     void CallReset(float time)
@@ -108,6 +136,7 @@ public class owlMove : MonoBehaviour, IResetable
     {
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         addVelovity = false;
+        isDive = false;
         transform.rotation = Quaternion.identity;
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         GetComponent<Rigidbody2D>().angularVelocity = 0f;
@@ -117,7 +146,7 @@ public class owlMove : MonoBehaviour, IResetable
     public void Reset()
     {
         jumpCount = 0;
-        transform.position = startPoint.position;
+        transform.position = StartPoint.position;
         StopMove();
 
     }
@@ -133,7 +162,7 @@ public class owlMove : MonoBehaviour, IResetable
         {
 
             UpdateLine(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            if (useTimer)
+            if (UseTimer)
             {
                 time += Time.deltaTime;
                 // jumpVelocity += new Vector3(Time.deltaTime, Time.deltaTime, 0);
