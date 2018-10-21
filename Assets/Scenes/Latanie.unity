@@ -318,7 +318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &265565495
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1024,10 +1024,10 @@ GameObject:
   - component: {fileID: 1245477118}
   - component: {fileID: 1245477121}
   - component: {fileID: 1245477120}
-  - component: {fileID: 1245477123}
-  - component: {fileID: 1245477119}
-  - component: {fileID: 1245477122}
   - component: {fileID: 1245477124}
+  - component: {fileID: 1245477119}
+  - component: {fileID: 1245477123}
+  - component: {fileID: 1245477122}
   m_Layer: 0
   m_Name: Owl
   m_TagString: owl
@@ -1106,13 +1106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e742de18dd26884c9a0325b0ba6a361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PossibleJumpsCount: 1
-  PowerLevelText: {fileID: 265565496}
-  JumpLine: {fileID: 488556}
   StartPoint: {fileID: 1118150793}
-  UseTimer: 0
   UsePowerDive: 1
   feathersParticle: {fileID: 142333939}
+  divePower: 50
+  possibleDiveCount: 1
 --- !u!61 &1245477120
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1187,7 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b37077b10e76a942bfda31e32c3e4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
+  speed: 0.2
 --- !u!114 &1245477124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,7 +1199,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingBodytype: 1
   isJumppingMode: 0
-  isAfterJump: 0
+  isControlDisabled: 0
+  allowPowerDive: 0
+  defaultAnimation: 
 --- !u!1 &1291554786
 GameObject:
   m_ObjectHideFlags: 0

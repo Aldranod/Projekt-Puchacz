@@ -1,15 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour {
 
-    public string OwlType = "puchacz";
+    public OwlType owlType;
 
     void OnMouseUp()
     {
-        SceneManager.LoadScene("PuchaczGame");
+        switch (owlType)
+        {
+            case OwlType.płomykówka:
+                SceneManager.LoadScene("Latanie");
+                break;
+            case OwlType.puchacz:
+                SceneManager.LoadScene("Skakanie");
+                break;
+            default:
+                break;
+        }
 
     }
 }

@@ -8,7 +8,10 @@ public class owlManager : MonoBehaviour {
     //czy użytkownik naciąga sowe do skoku
     public bool isJumppingMode = false;
     //czu użytkownik wykonał skok
-    public bool isAfterJump = false;
+    public bool isControlDisabled = false;
+    //czy w danej chwili mozna uzyc powerDive
+    public bool allowPowerDive = false;
+    public string defaultAnimation = "Idle";
 
     bool isWatingForReset = false;
     float time = 0f;
@@ -55,7 +58,7 @@ public class owlManager : MonoBehaviour {
         }
         isWatingForReset = false;
         GetComponent<Rigidbody2D>().bodyType =  startingBodytype;
-        isAfterJump = false;
-        GetComponent<Animator>().Play("Idle");
+        isControlDisabled = false;
+        GetComponent<Animator>().Play(defaultAnimation);
     }
 }
