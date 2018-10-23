@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class owlMove : MonoBehaviour, IResetable
 {
-    public Transform StartPoint;
+ 
     public bool UsePowerDive = true;
     public GameObject feathersParticle;
     public float divePower = 7f;
@@ -14,11 +14,12 @@ public class owlMove : MonoBehaviour, IResetable
     IMove moveScript;
     owlManager manager;
     float time;
-
+    Vector2 StartPoint;
 
     #region eventy
     void Start()
     {
+        StartPoint = transform.position;
         manager = GetComponent<owlManager>();
         moveScript = GetComponent<IMove>();
     }
@@ -51,7 +52,7 @@ public class owlMove : MonoBehaviour, IResetable
                 break;
             case "victim":
 
-                // GameObject.Destroy(col.gameObject);
+                GameObject.Destroy(GameObject.FindWithTag(colliderTag));
                 StandardCollisionStop(2f);
                 break;
             case "owlCatch":
@@ -123,7 +124,7 @@ public class owlMove : MonoBehaviour, IResetable
     //resetuje pozycje sowy
     public void Reset()
     {
-        transform.position = StartPoint.position;
+        transform.position = StartPoint;
         StopMove();
         diveCount = 0;
     }
